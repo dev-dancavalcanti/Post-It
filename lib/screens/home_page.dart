@@ -1,0 +1,91 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todos/utils/widgets/test.dart';
+import '../controllers/todo_controller.dart';
+import '../utils/widgets/todo_dialog.dart';
+import '../utils/widgets/todo_tile.dart';
+
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  late ToDoController controller;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    controller = context.watch<ToDoController>();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Center(
+          child: Text(
+            'Post-it',
+          ),
+        ),
+        leading: const SizedBox(),
+        actions: [
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).pushNamed('/contact');
+            },
+            child: const Padding(
+              padding: EdgeInsets.only(right: 20),
+              child: Icon(
+                Icons.info_sharp,
+                color: Colors.black,
+              ),
+            ),
+          )
+        ],
+      ),
+      body: ChangeNotifierProvider.value(
+          value: controller,
+          builder: (_, child) {
+            if (controller.toDoIsEmpty) {
+              return const Carregamento();
+            } else {
+              return controller.isLoading
+                  ? const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : ListView.builder(
+                      itemCount: controller.toDoList.toDo.length,
+                      itemBuilder: (context, index) {
+                        return ToDoTile(
+                          title: controller.toDoList.toDo[index].title,
+                          taskCompleted:
+                              controller.toDoList.toDo[index].enabled,
+                          onChanged: (value) =>
+                              controller.checkBoxChanged(value, index),
+                          deletedTask: (context) =>
+                              controller.deletedTask(index),
+                          color: Colors.primaries[
+                              controller.toDoList.toDo[index].intColor],
+                        );
+                      });
+            }
+          }),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showDialog(
+              context: context,
+              builder: (context) {
+                return const DialogBox();
+              });
+        },
+        child: const Icon(
+          Icons.add,
+          size: 30,
+        ),
+      ),
+    );
+  }
+}
