@@ -40,7 +40,7 @@ class SplashPageState extends State<SplashPage>
 
     _animationController.addListener(() {
       setState(() {
-        if (_animationController.isCompleted) {
+        if (_animationController.isCompleted && mounted) {
           Navigator.of(context).pushReplacementNamed('/home');
         }
       });
