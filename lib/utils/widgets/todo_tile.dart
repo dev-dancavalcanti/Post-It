@@ -51,12 +51,15 @@ class ToDoTile extends StatelessWidget {
                   onChanged: onChanged,
                   activeColor: Colors.black,
                 ),
-                Text(
-                  title,
-                  style: TextStyle(
-                      decoration: taskCompleted
-                          ? TextDecoration.lineThrough
-                          : TextDecoration.none),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * .7,
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                        decoration: taskCompleted
+                            ? TextDecoration.lineThrough
+                            : TextDecoration.none),
+                  ),
                 ),
               ],
             ),
