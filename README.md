@@ -1,16 +1,24 @@
-# todos
+# Post-it
 
-A new Flutter project.
+App criado com objetivo de criar um CRUD com uma lista de ToDo. 
+Salvando no Hive e no SharedPreference.
 
-## Getting Started
+## Desenvolvimento:
 
-This project is a starting point for a Flutter application.
+- [x] Splash Page com animação controlada.
+- [x] HomePage
+- [x] ContactMePage
+- [x] Service
+- [x] Repository
+- [x] Hive
+- [x] Shared Preference
+- [x] SOLID
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Aprendizado:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* CRUD.
+* Uso do Hive.
+* Uso do Shared Preference.
+* Injeção de Dependencia: Provider.
+* SOLID.
