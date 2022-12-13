@@ -11,6 +11,13 @@ class ToDoController extends ChangeNotifier {
 
   TextEditingController textController = TextEditingController();
 
+  Future<void> initialize() async {
+    toggleLoading();
+    toDoList = await _db.initialize();
+    await listIsEmpty();
+    toggleLoading();
+  }
+
   late ToDoModel toDoList;
   bool isLoading = false;
   bool toDoIsEmpty = false;
@@ -18,13 +25,6 @@ class ToDoController extends ChangeNotifier {
   Future<void> toggleLoading() async {
     isLoading = !isLoading;
     notifyListeners();
-  }
-
-  Future<void> initialize() async {
-    toggleLoading();
-    toDoList = await _db.initialize();
-    await listIsEmpty();
-    toggleLoading();
   }
 
   Future<bool> listIsEmpty() async {
