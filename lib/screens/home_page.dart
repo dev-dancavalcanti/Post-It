@@ -13,16 +13,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late ToDoController controller;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    controller = context.watch<ToDoController>();
-  }
-
   @override
   Widget build(BuildContext context) {
+    final ToDoController controller = context.watch<ToDoController>();
     return Scaffold(
       appBar: AppBar(
         title: const Center(
@@ -48,7 +41,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: ChangeNotifierProvider.value(
           value: controller,
-          builder: (_, child) {
+          builder: (context, child) {
             if (controller.toDoIsEmpty) {
               return const ToDoEmpty();
             } else {
